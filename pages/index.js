@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useQuery } from 'urql'
 import { PRODUCT_QUERY } from '@/lib/query'
 import Product from '@/Components/product'
+import { Gallery } from '@/styles/Gallery'
 
 function Loading() {
   return (
@@ -33,10 +34,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className='w-screen h-screen text-3xl p-10 font-bold'>
-        {products.map((product) => (
-          <Product key={product.attributes.slug} product={product}/>
-        ))}
+      <main>
+        <h1>NextJS</h1>
+        <Gallery>
+          {products.map((product) => (
+            <Product key={product.attributes.slug} product={product}/>
+          ))}
+        </Gallery>
       </main>
     </>
   )
