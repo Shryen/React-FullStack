@@ -3,22 +3,7 @@ import { useQuery } from 'urql'
 import { PRODUCT_QUERY } from '@/lib/query'
 import Product from '@/Components/product'
 import { Gallery } from '@/styles/Gallery'
-
-function Loading() {
-  return (
-    <div className='h-screen w-screen flex justify-center items-center text-5xl'>
-      <p>Loading</p>
-    </div>
-  )
-}
-function Error(props) {
-  return (
-    <div className='h-screen w-screen flex justify-center items-center text-5xl text-red-700'>
-      <p>Oh no... {props.error}</p>
-    </div>
-  )
-}
-
+import { Loading, Error } from '@/Components/Messages'
 
 export default function Home() {
   const [result] = useQuery({ query: PRODUCT_QUERY });
