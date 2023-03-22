@@ -1,6 +1,30 @@
 import Head from 'next/head'
+import { useQuery } from 'urql'
+import { PRODUCT_QUERY } from '@/lib/query'
+import Product from '@/Components/product'
+
+function Loading() {
+  return (
+    <div className='h-screen w-screen flex justify-center items-center text-5xl'>
+      <p>Loading</p>
+    </div>
+  )
+}
+function Error(props) {
+  return (
+    <div className='h-screen w-screen flex justify-center items-center text-5xl text-red-700'>
+      <p>Oh no... {props.error}</p>
+    </div>
+  )
+}
+
 
 export default function Home() {
+  const [result] = useQuery({ query: PRODUCT_QUERY });
+  const { data, fetching, error } = result;
+  if (fetching) return <Loading />
+  if (error) return <Error error={error.message} />
+  const products = data.products.data;
   return (
     <>
       <Head>
@@ -9,8 +33,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main >
-        <h1>Hello World</h1>
+      <main className='w-screen h-screen text-3xl p-10 font-bold'>
+        {products.map((product) => (
+          <Product key={product.attributes.slug} product={product}/>
+        ))}
       </main>
     </>
   )
