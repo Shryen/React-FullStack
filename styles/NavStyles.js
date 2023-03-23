@@ -15,7 +15,6 @@ export const NavStyles = styled.nav`
 `
 
 export const NavItems = styled.div`
-@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
     display: flex;
     align-items: center;
     justify-content: space-around;

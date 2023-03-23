@@ -7,4 +7,9 @@ export const DetailsStyle = styled.div`
     img{
         width: 40%;
     }
+    h3{
+        font-size: 1.75rem;
+        color: var(--primary);
+        font-weight: bold;
+    }
 `;
