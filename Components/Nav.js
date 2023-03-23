@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { HiShoppingCart } from 'react-icons/hi'
+import { NavItems, NavStyles } from "@/styles/NavStyles";
 
 export default function Nav() {
     return (
-        <div>
+        <NavStyles>
             <Link href={'/'}>Styled.</Link>
-            <div>
+            <NavItems>
                 <div>
                     <HiShoppingCart />
                     <h3>Cart</h3>
                 </div>
-            </div>
-        </div>
+            </NavItems>
+        </NavStyles>
     )
 }
