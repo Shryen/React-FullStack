@@ -4,10 +4,12 @@ import { PRODUCT_QUERY } from '@/lib/query'
 import Product from '@/Components/product'
 import { Gallery } from '@/styles/Gallery'
 import { Loading, Error } from '@/Components/Messages'
+import Nav from '@/Components/Nav'
 
 export default function Home() {
   const [result] = useQuery({ query: PRODUCT_QUERY });
   const { data, fetching, error } = result;
+  console.log(result)
   if (fetching) return <Loading />
   if (error) return <Error error={error.message} />
   const products = data.products.data;
@@ -20,7 +22,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>NextJS</h1>
         <Gallery>
           {products.map((product) => (
             <Product key={product.attributes.slug} product={product}/>
