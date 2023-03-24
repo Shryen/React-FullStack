@@ -27,9 +27,24 @@ export const NavItems = styled.div`
     }
     h3{
         font-size: 1.2rem;
-        padding: 0.25rem;
     }
     svg{
         font-size: 1.75rem;
+        cursor: pointer;
+    }
+    span{
+        background: #ff2626;
+        color: white;
+        width: 1.3rem;
+        height: 1.3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        font-size: 0.75rem;
+        position: absolute;
+        right: 0;
+        top: -20%;
+        pointer-events: none;
     }
 `
