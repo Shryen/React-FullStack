@@ -4,8 +4,9 @@ import { Error, Loading } from "@/Components/Messages";
 import { useRouter } from "next/router";
 import { DetailsStyle } from "@/styles/ProductDetails";
 import { Buy, ProductInfo, Quantity } from "@/styles/ProductStyle";
-import {AiFillPlusCircle, AiFillMinusCircle} from 'react-icons/ai';
+import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { useStateContext } from "@/lib/context";
+
 
 export default function ProductDetails() {
 
@@ -23,16 +24,15 @@ export default function ProductDetails() {
   const { data, fetching, error } = result;
 
   //Checking for status
-  if(fetching) return <Loading />
-  if(error) return <Error error={error.message} />
+  if (fetching) return <Loading />
+  if (error) return <Error error={error.message} />
 
   //Extraction
-  const {Image,Title,Description, Price} = data.products.data[0].attributes;
+  const { Image, Title, Description, Price } = data.products.data[0].attributes;
 
 
   return (
     <DetailsStyle>
-      <title>{Title}</title>
       <img src={Image.data.attributes.formats.medium.url} alt={Title} />
       <ProductInfo>
         <h3>{Title}</h3>
@@ -41,14 +41,14 @@ export default function ProductDetails() {
         <Quantity>
           <span>Quantity</span>
           <button>
-            <AiFillMinusCircle onClick={decreaseQty}/>
+            <AiFillMinusCircle onClick={decreaseQty} />
           </button>
           <p>{qty}</p>
           <button>
-            <AiFillPlusCircle onClick={increaseQty}/>
+            <AiFillPlusCircle onClick={increaseQty} />
           </button>
         </Quantity>
-        <Buy onClick={()=>onAdd(data.products.data[0].attributes,qty)}>Add to Cart</Buy>
+        <Buy onClick={() => onAdd(data.products.data[0].attributes, qty)}>Add to Cart</Buy>
       </ProductInfo>
 
     </DetailsStyle>
