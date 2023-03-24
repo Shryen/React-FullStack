@@ -1,4 +1,5 @@
 import { useStateContext } from "@/lib/context"
+import getStripe from "@/lib/getStripe";
 import { Card, CardInfo, CartQty, CartStyle, CartWrapper, EmptyStyle, Checkout, Cards } from "@/styles/CartStyles";
 import { Quantity } from "@/styles/ProductStyle";
 import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
@@ -22,11 +23,20 @@ const cards = {
     }
 }
 
+//Payment
+const handleCheckout = async () => {
+    const stripe = await getStripe();
+    const response = await fetch('/api/stripe', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cartItems),
+    })
+    const data = await response.json();
+    await stripe.redirectToCheckout({ sessionId: data.id })
+}
 
 export default function Cart() {
-
     const { cartItems, setShowCart, onAdd, onRemove, totalPrice } = useStateContext();
-
     return (
         <CartWrapper
             animate={{ opacity: 1 }}
@@ -79,7 +89,7 @@ export default function Cart() {
                 {cartItems.length >= 1 && (
                     <Checkout>
                         <h3>Subtotal:<b> €{totalPrice.toFixed(2)}</b></h3>
-                        <button>Purchase</button>
+                        <button onClick={handleCheckout}>Purchase</button>
                     </Checkout>
                 )}
             </CartStyle>
